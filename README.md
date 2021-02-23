@@ -1,10 +1,12 @@
 contextshare
 ============
 
-Simple interface for numpy arrays in multiprocessing contexts.
+Simple context manager to share numpy arrays in python multiprocessing.
 
 Example
 -------
+
+The following code example is complete and compares a `serial()` implementation  with the `parallel()` version thereof implemented with `contextshare`.
 
 ```python
 #!/usr/bin/env python

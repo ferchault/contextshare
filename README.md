@@ -48,6 +48,35 @@ if __name__ == "__main__":
    
 ```
 
+Documentation
+-------------
+The context manager `shared.SharedMemory` takes two arguments: the dictionary of numpy arrays to make available on all parallel workers and the number of workers to create.
+
+```python
+# makes variables D and b available under the same name on 11 workers
+with shared.SharedMemory({"D": D, "b": b}, nworkers=11) as sm:
+```
+
+The workers are spawned upon entering the context and are stopped upon exiting. Shared memory references are cleaned up automatically. Note that only numpy arrays are supported for sharing. Other arguments should be placed in the arguments of the function below. The function to call (i.e. the body of the serial for loop) needs to be placed in a function and either decorated or called explicitly:
+
+```python
+# decorator
+@sm.register
+def one_sigma(sigma):
+    pass
+
+# or, equivalently, an explicit call
+sm.register(one_sigma)        
+```
+Calling this decorated function returns immediately and enqueues a function call. Calling 
+
+```python
+sm.evaluate(progress=True)
+```
+starts the calculations and returns the results in order. With `progress=True` a progress bar is shown, default is to be silent.
+
+
+
 Credits
 -------
 

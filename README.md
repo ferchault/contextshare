@@ -1,7 +1,11 @@
 contextshare
 ============
 
-Simple context manager to share numpy arrays in python multiprocessing.
+Simple context manager to share numpy arrays in python multiprocessing. Installation on **Python >= 3.8**:
+
+```
+pip install contextshare
+```
 
 Example
 -------
